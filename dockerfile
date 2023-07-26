@@ -1,6 +1,6 @@
 
 # ---- Python Build Stage ----
-FROM python:3.9-alpine AS python-builder
+FROM python:3.11-alpine3.17 AS python-builder
 WORKDIR /app
 
 # Set environment variables
