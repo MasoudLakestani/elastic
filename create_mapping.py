@@ -73,11 +73,12 @@ settings = {
             "website" : { "enabled": "false" },
             "website_url" :{ "enabled": "false" },
             "url" : { "enabled": "false" },
-            "is_active" : { "enabled": "false" },
+            "is_active" : { "type": "boolean"},
             "image" : { "enabled": "false" },
-            "selling_price" : { "enabled": "false" },
-            "rrp_price" : { "enabled": "false" },
-            "discount_percent" : { "enabled": "false" },
+            "discount_price" : { "type": "float" },
+            "selling_price" : { "type": "float" },
+            "rrp_price" : { "type": "float" },
+            "discount_percent" : { "type": "float" },
 
 
 
