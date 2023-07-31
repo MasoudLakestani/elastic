@@ -2,7 +2,7 @@ from elasticsearch import Elasticsearch
 import time
 
 # Connect to Elasticsearch
-es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch("http://5.34.202.146:9200")
 
 # Ensure Elasticsearch is up
 while True:
@@ -69,9 +69,18 @@ settings = {
             "id" : { "type": "integer" },
             "title_fa" : { "type": "text", "analyzer": "persian_analyzer" },
             "title_en" : {"type": "text", "analyzer": "english_analyzer" },
-            "category" : { "type": "text", "analyzer": "persian_analyzer" },
+            "category1" : { "type": "text", "analyzer": "persian_analyzer" },
+            "website" : { "enabled": "false" },
+            "website_url" :{ "enabled": "false" },
             "url" : { "enabled": "false" },
             "is_active" : { "enabled": "false" },
+            "image" : { "enabled": "false" },
+            "selling_price" : { "enabled": "false" },
+            "rrp_price" : { "enabled": "false" },
+            "discount_percent" : { "enabled": "false" },
+
+
+
         }
     }
 }
