@@ -115,6 +115,10 @@ settings = {
                     "type": "stop",
                     "stopwords": "_english_"
                 },
+                "custom_stop":{
+                    "type":"stop",
+                    "stopwords_path":"/usr/share/elasticsearch/config/stop_words.txt"
+                },
                 "synonym_words":{
                     "type": "synonym",
                     "synonyms_path": "/usr/share/elasticsearch/config/synonyms/synonym.txt"
@@ -130,6 +134,7 @@ settings = {
                         "arabic_normalization",
                         "persian_normalization",
                         "persian_stop",
+                        "custom_stop",
                         "synonym_words",
                         "unique"
                     ]

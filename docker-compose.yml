@@ -6,6 +6,7 @@ services:
     volumes:
       - blackeveryday:/usr/share/elasticsearch/data
       - ./synonym.txt:/usr/share/elasticsearch/config/synonyms/synonym.txt
+      - ./stop_words.txt:/usr/share/elasticsearch/config/stop_words.txt
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
