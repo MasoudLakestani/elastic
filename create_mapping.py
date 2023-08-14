@@ -2,8 +2,8 @@ from elasticsearch import Elasticsearch
 import time
 
 # Connect to Elasticsearch
-es = Elasticsearch("http://5.34.202.146:9200")
-# es = Elasticsearch('http://localhost:9200')
+# es = Elasticsearch("http://5.34.202.146:9200")
+es = Elasticsearch('http://localhost:9200')
 
 # Ensure Elasticsearch is up
 while True:
@@ -166,6 +166,7 @@ settings = {
                 "analyzer": "persian_analyzer",
                 "similarity": "category_similarity"
                 },
+            "brand":{"type":"text", "analyzer":"persian_analyzer"},
             "website" : { "enabled": "false" },
             "website_url" :{ "enabled": "false" },
             "url" : { "enabled": "false" },
