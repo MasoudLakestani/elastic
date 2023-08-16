@@ -10,7 +10,7 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms8g -Xmx8g
+      - ES_JAVA_OPTS=-Xms16g -Xmx16g
     networks:
       - elastic
     ports:
