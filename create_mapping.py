@@ -2,8 +2,8 @@ from elasticsearch import Elasticsearch
 import time
 
 # Connect to Elasticsearch
-# es = Elasticsearch("http://5.34.202.146:9200")
-es = Elasticsearch('http://localhost:9200')
+es = Elasticsearch("http://78.110.122.137:9200")
+# es = Elasticsearch('http://localhost:9200')
 
 # Ensure Elasticsearch is up
 while True:
@@ -153,6 +153,7 @@ settings = {
         }
     },
     "mappings": {
+        "dynamic": False,
         "properties": {
             "id" : { "type": "integer" },
             "title_fa" : { 
