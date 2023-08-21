@@ -36,6 +36,8 @@ services:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./postgresql-42.6.0.jar:/usr/share/logstash/postgres_driver/postgresql-42.6.0.jar
+    environment:
+      - ES_JAVA_OPTS=-Xms4g -Xmx4g
     networks:
       - elastic
     container_name: log01
