@@ -10,7 +10,7 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms16g -Xmx16g
+      - ES_JAVA_OPTS=-Xms22g -Xmx22g
     networks:
       - elastic
     ports:
@@ -42,6 +42,17 @@ services:
       - elastic
     container_name: log01
     restart: always
+    depends_on:
+      - es01
+
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:8.9.0
+    volumes:
+      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+      - ./modules.d:/usr/share/metricbeat/modules.d 
+
+    networks:
+      - elastic
     depends_on:
       - es01
 
