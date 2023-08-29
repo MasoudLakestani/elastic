@@ -16,7 +16,7 @@ while True:
         time.sleep(5)
 settings = {
     "settings": {
-        "number_of_shards":2,
+        "number_of_shards":4,
         "number_of_replicas": 0,
         "similarity": {
             "title_fa_similarity": {

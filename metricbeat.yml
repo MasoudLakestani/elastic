@@ -5,22 +5,50 @@ metricbeat.config.modules:
 metricbeat.modules:
 - module: system
   metricsets:
-    - "container"
-    - "cpu"
-    - "diskio"
-    - "healthcheck"
-    - "info"
-    #- "image"
-    - "memory"
-    - "network"
+    - cpu             # CPU usage
+    - load            # CPU load averages
+    - memory          # Memory usage
+    - network         # Network IO
+    - process         # Per process metrics
+    - process_summary # Process summary
+    - uptime          # System Uptime
+    - socket_summary  # Socket summary
+    - core           # Per CPU core usage
+    - diskio         # Disk IO
+    - filesystem     # File system usage for each mountpoint
+    - fsstat         # File system summary metrics
+    - raid           # Raid
+    - socket         # Sockets and connection info (linux only)
+    - service        # systemd service information
   enabled: true
   period: 10s
+  processes: ['.*']
+  cpu.metrics:  ["percentages","normalized_percentages"]  # The other available option is ticks.
+  core.metrics: ["percentages"]
+
+- module: elasticsearch
+  metricsets:
+    - node
+    - node_stats
+    - index
+    - index_recovery
+    - index_summary
+    - ingest_pipeline
+    - shard
+    - ml_job
+  period: 10s
+  xpack.enabled: true
+  hosts: ["http://es01:9200"]
+
+- module: logstash
+  metricsets: ["node", "node_stats"]
+  enabled: true
+  period: 10s
+  xpack.enabled: true
+  hosts: ["localhost:9600"]
 
 output.elasticsearch:
   hosts: ["es01:9200"]
 
-metricbeat.modules:
-- module: elasticsearch
-  xpack.enabled: true
-  period: 10s
-  hosts: ["http://es01:9200"]
+
+
