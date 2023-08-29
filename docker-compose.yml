@@ -1,4 +1,3 @@
-
 services:
   es01:
     build:
@@ -20,9 +19,9 @@ services:
   kib01:
     image: docker.elastic.co/kibana/kibana:8.9.0
     environment:
-      - "ELASTICSEARCH_HOSTS=http://es01:9200"
+      - ELASTICSEARCH_HOSTS=http://es01:9200
     ports:
-      - "5601:5601"
+      - 5601:5601
     networks:
       - elastic
     container_name: kib01
@@ -40,6 +39,8 @@ services:
       - ES_JAVA_OPTS=-Xms8g -Xmx8g
     networks:
       - elastic
+    ports:
+      - 9600:9600
     container_name: log01
     restart: always
     depends_on:
@@ -48,9 +49,14 @@ services:
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:8.9.0
     volumes:
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro
       - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
-      - ./modules.d:/usr/share/metricbeat/modules.d 
-
+      - ./modules.d:/usr/share/metricbeat/modules.d
+      - /run/systemd/private:/run/systemd/private
+      - /var/run/dbus/:/var/run/dbus/
+    user: root
     networks:
       - elastic
     depends_on:
@@ -62,4 +68,3 @@ networks:
 
 volumes:
   blackeveryday:
-
