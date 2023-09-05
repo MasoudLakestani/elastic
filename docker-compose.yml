@@ -58,7 +58,7 @@ services:
       - /run/systemd/private:/run/systemd/private
       - /var/run/dbus/:/var/run/dbus/
     user: root
-    container_name: metr01
+    container_name: metric01
     networks:
       - elastic
     depends_on:
