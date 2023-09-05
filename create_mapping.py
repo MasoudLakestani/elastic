@@ -4,6 +4,8 @@ import time
 # Connect to Elasticsearch
 es = Elasticsearch("http://78.110.122.137:9200")
 # es = Elasticsearch('http://localhost:9200')
+# es = Elasticsearch('http://192.168.88:9200')
+
 
 # Ensure Elasticsearch is up
 while True:
@@ -16,7 +18,7 @@ while True:
         time.sleep(5)
 settings = {
     "settings": {
-        "number_of_shards":4,
+        "number_of_shards":2,
         "number_of_replicas": 0,
         "similarity": {
             "title_fa_similarity": {
@@ -94,10 +96,14 @@ settings = {
                 },
             "title_en" : {"type": "text", "analyzer": "english_analyzer" },
             "category1" : {
-                "type": "text",
-                "analyzer": "persian_analyzer",
-                "similarity": "category_similarity"
+                "type": "keyword",
+                # "analyzer": "persian_analyzer",
+                # "similarity": "category_similarity"
                 },
+            "category2" : {"enabled": "false"},
+            "category3" : {"enabled": "false"},
+            "category4" : {"enabled": "false"},
+            "category5" : {"enabled": "false"},
             "brand":{"type":"text", "analyzer":"persian_analyzer"},
             "website" : { "enabled": "false" },
             "website_url" :{ "enabled": "false" },
