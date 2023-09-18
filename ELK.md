@@ -28,3 +28,58 @@ Metricbeat, on the other hand, is used for collecting metrics from the operating
 - **Install Elasticsearch with .zip on Windows**
 - **Install Elasticsearch with RPM**
 - **Install Elasticsearch with Docker**
+
+
+<h4>Install Elasticsearch with Docker</h4>
+
+```sh
+docker pull docker.elastic.co/elasticsearch/elasticsearch:[version]
+```
+
+
+<h4>Elasticsearch Service Configuration for Docker Compose File</h4>
+
+```yaml
+es01:
+  image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}  # Elasticsearch Docker image with version
+  networks:
+    - elastic  # Network name
+  ports:
+    - 9200:9200  # Port mapping
+  volumes:
+    - esdata01:/usr/share/elasticsearch/data  # Persistent data volume
+    - certs:/usr/share/elasticsearch/config/certs  # Certificate volume
+    - ./synonym.txt:/usr/share/elasticsearch/config/synonyms/synonym.txt  # Synonyms file volume
+    - ./stop_words.txt:/usr/share/elasticsearch/config/stop_words.txt  # Stop words file volume
+  environment:
+    - node.name=es01  # Node name
+    - cluster.name=${CLUSTER_NAME}  # Cluster name
+    - discovery.type=single-node  # Single-node discovery type
+    - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}  # Password for Elasticsearch
+    - bootstrap.memory_lock=true  # Lock the process address space into RAM
+    - xpack.security.enabled=true  # Enable X-Pack security
+    - xpack.security.http.ssl.enabled=true  # Enable SSL for HTTP
+    - xpack.security.http.ssl.key=certs/es01/es01.key  # SSL key for HTTP
+    - xpack.security.http.ssl.certificate=certs/es01/es01.crt  # SSL certificate for HTTP
+    - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt  # Certificate authorities for HTTP SSL
+    - xpack.security.transport.ssl.enabled=true  # Enable SSL for transport layer
+    - xpack.security.transport.ssl.key=certs/es01/es01.key  # SSL key for transport layer
+    - xpack.security.transport.ssl.certificate=certs/es01/es01.crt  # SSL certificate for transport layer
+    - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt  # Certificate authorities for transport SSL
+    - xpack.security.transport.ssl.verification_mode=certificate  # SSL verification mode for transport
+    # - xpack.security.http.ssl.client_authentication=required  # Uncomment if client authentication is required
+    - xpack.license.self_generated.type=${LICENSE}  # License type
+  mem_limit: ${MEM_LIMIT}  # Memory limit
+  ulimits:
+    memlock:
+      soft: -1  # Soft limit for memory lock
+      hard: -1  # Hard limit for memory lock
+  restart: always  # Always restart the service if it stops
+```
+
+<h5>Environment Variable Explanations</h5>
+
+**ELASTIC_PASSWORD**: Sets the password for the Elasticsearch user.
+**bootstrap.memory_lock=true**: Locks the process address space into RAM, preventing Elasticsearch from swapping to disk, which is crucial for performance.
+**xpack.security.enabled=true**: Enables X-Pack security features like authentication and role-based access control.
+**xpack.security.http.ssl.enabled=true**: Enables SSL for HTTP communication
