@@ -6,3 +6,4 @@ pyproject.toml
 elastic.doc
 my.doc
 create_mapping.py
+*.crt
