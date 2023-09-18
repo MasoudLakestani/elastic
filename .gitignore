@@ -5,3 +5,4 @@ poetry.lock
 pyproject.toml
 elastic.doc
 my.doc
+create_mapping.py
