@@ -41,13 +41,13 @@ metricbeat.modules:
       - ml_job
     xpack.enabled: true
     period: 10s
-    hosts: https://es01:9200
-    ssl.certificate_authorities: "certs/ca/ca.crt"
-    ssl.certificate: "certs/es01/es01.crt"
-    ssl.key: "certs/es01/es01.key"
+    hosts: http://es01:9200
+    # ssl.certificate_authorities: "certs/ca/ca.crt"
+    # ssl.certificate: "certs/es01/es01.crt"
+    # ssl.key: "certs/es01/es01.key"
     username: elastic
     password: M@cadamia2023
-    ssl.enabled: true
+    # ssl.enabled: true
 
   - module: logstash
     metricsets: ["node", "node_stats"]
@@ -82,13 +82,13 @@ metricbeat.modules:
     enabled: true
 
 output.elasticsearch:
-  hosts: https://es01:9200
+  hosts: http://es01:9200
   username: elastic
   password: M@cadamia2023
-  ssl:
-    certificate: "certs/es01/es01.crt"
-    certificate_authorities: "certs/ca/ca.crt"
-    key: "certs/es01/es01.key"
+  # ssl:
+  #   certificate: "certs/es01/es01.crt"
+  #   certificate_authorities: "certs/ca/ca.crt"
+  #   key: "certs/es01/es01.key"
 
 setup.kibana:
   host: "kib01:5601"
