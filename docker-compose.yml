@@ -150,7 +150,7 @@ services:
       - certs:/usr/share/logstash/certs
       - logstashdata01:/usr/share/logstash/data
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
-      - ./logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./postgresql-42.6.0.jar:/usr/share/logstash/postgres_driver/postgresql-42.6.0.jar
     environment:
       # - xpack.monitoring.enabled=false
