@@ -152,6 +152,7 @@ services:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
       - ./logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./postgresql-42.6.0.jar:/usr/share/logstash/postgres_driver/postgresql-42.6.0.jar
+      - ./time.txt:/usr/share/logstash/time.txt
     environment:
       # - xpack.monitoring.enabled=false
       - ELASTIC_USER=elastic
