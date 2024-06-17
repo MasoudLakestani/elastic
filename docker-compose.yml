@@ -162,32 +162,32 @@ services:
     container_name: log01
     restart: always
 
-  metricbeat:
-    depends_on:
-      es01:
-        condition: service_healthy
-      kib01:
-        condition: service_healthy
-    image: docker.elastic.co/beats/metricbeat:${STACK_VERSION}
-    user: root
-    volumes:
-      - certs:/usr/share/metricbeat/certs
-      - metricbeatdata01:/usr/share/metricbeat/data
-      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
-      - /proc:/hostfs/proc:ro
-      - /:/hostfs:ro
-      - /run/systemd/private:/run/systemd/private:ro
-      - /var/run/dbus/:/var/run/dbus:ro
-    environment:
-      - ELASTIC_USER=elastic
-      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
-      - ELASTIC_HOSTS=http://es01:9200
-      - KIBANA_HOSTS=http://kib01:5601
-      - LOGSTASH_HOSTS=http://log01:9600
-    container_name: metric01
-    restart: always
+  # metricbeat:
+  #   depends_on:
+  #     es01:
+  #       condition: service_healthy
+  #     kib01:
+  #       condition: service_healthy
+  #   image: docker.elastic.co/beats/metricbeat:${STACK_VERSION}
+  #   user: root
+  #   volumes:
+  #     - certs:/usr/share/metricbeat/certs
+  #     - metricbeatdata01:/usr/share/metricbeat/data
+  #     - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+  #     - /proc:/hostfs/proc:ro
+  #     - /:/hostfs:ro
+  #     - /run/systemd/private:/run/systemd/private:ro
+  #     - /var/run/dbus/:/var/run/dbus:ro
+  #   environment:
+  #     - ELASTIC_USER=elastic
+  #     - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+  #     - ELASTIC_HOSTS=http://es01:9200
+  #     - KIBANA_HOSTS=http://kib01:5601
+  #     - LOGSTASH_HOSTS=http://log01:9600
+  #   container_name: metric01
+  #   restart: always
 
 networks:
   default:
